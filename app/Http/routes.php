@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('task', 'TaskController@show');
+Route::get('show', 'TaskController@show');
+Route::get('save', 'TaskController@save');
