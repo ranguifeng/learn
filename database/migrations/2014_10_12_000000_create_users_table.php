@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('sex', 4)->nullable()->comment('性别 0保密 1男 2女');
             $table->integer('age')->default(0)->comment('年龄');
             $table->string('birthday', 20)->nullable()->comment('生日');
-            $table->string('email')->unique()->comment('邮箱');
+            $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
