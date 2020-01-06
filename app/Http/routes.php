@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', 'HomeController@index');
+
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('home', 'AuthController@index');
+    Route::get('login', 'AuthController@login');
+    Route::get('register', 'AuthController@register');
+    Route::post('register/action', 'AuthController@registerStore');
+    Route::post('login/action', 'AuthController@loginAction');
+});
