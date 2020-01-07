@@ -37,6 +37,6 @@ class TopicMakeExcerptCommand extends Command
      */
     public function handle()
     {
-        //
+        
     }
 }
