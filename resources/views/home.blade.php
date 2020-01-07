@@ -8,7 +8,11 @@
                 <div class="panel-heading">控制台</div>
 
                 <div class="panel-body">
-                    您已经登录了！
+                    @if(auth()->guest())
+                        请先登录！
+                    @else
+                        您已经登录了！
+                    @endif
                 </div>
             </div>
         </div>

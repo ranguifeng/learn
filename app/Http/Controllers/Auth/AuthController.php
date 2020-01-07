@@ -24,7 +24,7 @@ class AuthController extends Controller
         return view($this->rootView . '.register');
     }
 
-    public function registerStore(Request $request)
+    public function register_store(Request $request)
     {
 
         $rule = [
@@ -75,7 +75,7 @@ class AuthController extends Controller
         return redirect()->back()->with(['message' => '保存成功']);
     }
 
-    public function loginAction(Request $request)
+    public function login_action(Request $request)
     {
         $post = $request->all();
         $this->validate($request, [
@@ -88,10 +88,16 @@ class AuthController extends Controller
             'password.min' => '密码必须大于6位',
         ]);
 
-        $user = User::where(['email' => $post['email'], 'status' => 1])->get();
+        $user = User::where(['email' => $post['email'], 'status' => 1])->first();
 
         if (!$user) {
-            return redirect('login')->with(['message' => '找不到该用户']);
+            return redirect()->back()->with(['message' => '找不到该用户']);
+        }
+
+        if (!password_verify($post['password'], $user->password)) {
+            return redirect()->back()->with(['message' => '密码不正确']);
+        } else {
+            return redirect('/');
         }
     }
 }

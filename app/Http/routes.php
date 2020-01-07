@@ -15,11 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', 'HomeController@index');
+Route::get('home', 'AuthController@index');
+Route::get('task', 'TaskController@index');
 
 Route::group(['namespace' => 'Auth'], function () {
-    Route::get('home', 'AuthController@index');
+
     Route::get('login', 'AuthController@login');
     Route::get('register', 'AuthController@register');
-    Route::post('register/action', 'AuthController@registerStore');
-    Route::post('login/action', 'AuthController@loginAction');
+    Route::post('register/action', 'AuthController@register_store');
+    Route::post('login/action', 'AuthController@login_action');
+
+
 });

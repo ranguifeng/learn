@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->tinyInteger('status')->default(1)->comment('状态');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
