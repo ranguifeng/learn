@@ -19,6 +19,10 @@ Route::get('home', 'AuthController@index');
 Route::get('task', 'TaskController@index');
 Route::get('vp', 'TaskController@vp');
 
+Route::get('api/users', ['middleware' => 'throttle:60,1', function () {
+    return 1;
+}]);
+
 Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('login', 'AuthController@login');

@@ -2,18 +2,76 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use DateTimeInterface;
 
 class TaskController extends Controller
 {
-    public function index()
+    protected $viewRoot = 'task';
+
+    const REASON_PERSONAL_HOLIDAY_HJ = 301;
+    const REASON_PERSONAL_HOLIDAY_NXJ = 302;
+    const REASON_PERSONAL_HOLIDAY_SJ = 303;
+    const REASON_PERSONAL_HOLIDAY_CJ = 304;
+    const REASON_PERSONAL_HOLIDAY_BJ = 305;
+
+    const REASON_PERSONAL_HOLIDAY_TQJ = 306;
+    const REASON_PERSONAL_HOLIDAY_PCJ = 307;
+    const REASON_PERSONAL_HOLIDAY_SHJ = 308;
+    const REASON_PERSONAL_HOLIDAY_CJJ = 309;
+    const REASON_PERSONAL_HOLIDAY_CCWC = 310;
+
+    const REASON_PERSONAL_HOLIDAY_QT = 399;
+
+    public function index(Request $request)
     {
-        dump(Carbon::today()->toDateString());
+
+        $date = Carbon::now();
+
+        $list = [
+            ['name'=>'支付宝','money'=>'10'],
+            ['name'=>'微信','money'=>'10.3'],
+        ];
+        $res = collect($list)->sum('money');//20.3
+        $reason = 399;
+
+        $leaveTypes = static::getPersonalHolidayDictionary();
+
+        $leaveType = Arr::get($leaveTypes, $reason, $reason);
+        dump($leaveType);
+
+        return view("{$this->viewRoot}.task")->with(compact('date'));
     }
+
+
+    /**
+     *
+     * @return array
+     */
+    public static function getPersonalHolidayDictionary(){
+        return [
+            static::REASON_PERSONAL_HOLIDAY_HJ => "婚假",
+            static::REASON_PERSONAL_HOLIDAY_NXJ => "年休假",
+            static::REASON_PERSONAL_HOLIDAY_SJ => "事假",
+            static::REASON_PERSONAL_HOLIDAY_CJJ => "产假",
+            static::REASON_PERSONAL_HOLIDAY_BJ => "病假",
+            static::REASON_PERSONAL_HOLIDAY_TQJ => "探亲假",
+            static::REASON_PERSONAL_HOLIDAY_PCJ => "陪产假",
+            static::REASON_PERSONAL_HOLIDAY_SHJ => "丧假",
+            static::REASON_PERSONAL_HOLIDAY_CJJ => "产检假",
+            static::REASON_PERSONAL_HOLIDAY_CCWC => "出差或外出",
+            static::REASON_PERSONAL_HOLIDAY_QT => "其他",
+        ];
+    }
+
+
 
 
     public function vp()
