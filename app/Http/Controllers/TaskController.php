@@ -35,7 +35,7 @@ class TaskController extends Controller
 
         $date = Carbon::now();
 
-        $list = [
+        $list = (object)[
             ['name'=>'支付宝','money'=>'10'],
             ['name'=>'微信','money'=>'10.3'],
         ];
@@ -45,7 +45,9 @@ class TaskController extends Controller
         $leaveTypes = static::getPersonalHolidayDictionary();
 
         $leaveType = Arr::get($leaveTypes, $reason, $reason);
-        dump($leaveType);
+
+
+
 
         return view("{$this->viewRoot}.task")->with(compact('date'));
     }
