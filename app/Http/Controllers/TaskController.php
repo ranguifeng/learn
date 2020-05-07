@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\Music;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -41,7 +43,9 @@ class TaskController extends Controller
 
         $leaveType = Arr::get($leaveTypes, $reason, $reason);
 
-
+        $mobile = 13510111021;
+        $mobile = substr_replace($mobile,'****', 3,4);
+        dump($mobile);
 
 
         return view("{$this->viewRoot}.task")->with(compact('date'));
@@ -70,8 +74,10 @@ class TaskController extends Controller
 
     public function test()
     {
-        
+        $items = Music::limit(2)->get();
+        dump($items);
     }
+
 
 
 

@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/', 'HomeController@index');
 Route::get('home', 'AuthController@index');
 Route::get('task', 'TaskController@index');
+Route::get('test', 'TaskController@test');
 Route::get('vp', 'TaskController@vp');
 
 Route::get('api/users', ['middleware' => 'throttle:60,1', function () {
