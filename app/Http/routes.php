@@ -19,6 +19,7 @@ Route::get('home', 'AuthController@index');
 Route::get('task', 'TaskController@index');
 Route::get('test', 'TaskController@test');
 Route::get('vp', 'TaskController@vp');
+Route::get('faker', 'DuskCaseController@faker');
 
 Route::get('api/users', ['middleware' => 'throttle:60,1', function () {
     return 1;

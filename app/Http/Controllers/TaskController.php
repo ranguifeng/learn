@@ -74,8 +74,13 @@ class TaskController extends Controller
 
     public function test()
     {
-        $items = Music::limit(2)->get();
-        dump($items);
+        $names = [ 'red', 'green', 'yellow' ];
+        if (!in_array('color', $names)) {
+            $names = array_add($names, '3', 'color');
+        }
+
+
+
     }
 
 
