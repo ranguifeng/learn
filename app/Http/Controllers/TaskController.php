@@ -7,6 +7,7 @@ use App\Models\Music;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 
 class TaskController extends Controller
@@ -74,12 +75,17 @@ class TaskController extends Controller
 
     public function test()
     {
-        $names = [ 'red', 'green', 'yellow' ];
-        if (!in_array('color', $names)) {
-            $names = array_add($names, '3', 'color');
-        }
 
 
+
+    }
+
+    public function test1()
+    {
+        DB::connection()->enableQueryLog();
+
+        Music::take(5)->get();
+        dump(DB::getQueryLog());
 
     }
 

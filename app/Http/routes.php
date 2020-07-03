@@ -14,14 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/', 'HomeController@index');
 Route::get('home', 'AuthController@index');
 Route::get('task', 'TaskController@index');
 Route::get('test', 'TaskController@test');
 Route::get('vp', 'TaskController@vp');
 Route::get('faker', 'DuskCaseController@faker');
+Route::get('test1', 'TaskController@test1');
+Route::get('doc', 'DocController@phpword');
+Route::get('doc1', 'DocController@doc1');
+Route::get('doc2', 'DocController@doc2');
 
-Route::get('api/users', ['middleware' => 'throttle:60,1', function () {
+Route::get('api/users', ['middleware' => 'throttle:5,1', function () {
     return 1;
 }]);
 
@@ -31,6 +36,4 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('register', 'AuthController@register');
     Route::post('register/action', 'AuthController@register_store');
     Route::post('login/action', 'AuthController@login_action');
-
-
 });
