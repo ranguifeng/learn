@@ -26,6 +26,11 @@ Route::get('doc', 'DocController@phpword');
 Route::get('doc1', 'DocController@doc1');
 Route::get('doc2', 'DocController@doc2');
 
+Route::group(['prefix' => 'users'], function () {
+    Route::get('index', 'UsersController@index');
+});
+
+
 Route::get('api/users', ['middleware' => 'throttle:5,1', function () {
     return 1;
 }]);
